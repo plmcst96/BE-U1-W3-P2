@@ -43,7 +43,7 @@ public class BorrowDAO {
     }
 
     public List<Borrow> showUnreturnedItems() {
-        TypedQuery<Borrow> query = em.createQuery("SELECT b FROM Borrow b WHERE b.effectiveReturnDate = null", Borrow.class);
+        TypedQuery<Borrow> query = em.createQuery("SELECT b FROM Borrow b WHERE b.effectiveReturnDate IS NULL AND b.returnDate < :today", Borrow.class);
         return query.getResultList();
     }
     public boolean isItemAvaiable(LibraryItem item) {
