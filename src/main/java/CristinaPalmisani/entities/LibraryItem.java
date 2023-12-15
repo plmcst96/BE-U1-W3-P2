@@ -1,18 +1,19 @@
 package CristinaPalmisani.entities;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.List;
 import java.util.UUID;
 
 @Entity
 @Table(name = "catalogue")
+@Inheritance(strategy = InheritanceType.JOINED)
 public abstract class LibraryItem {
     @Id
     @GeneratedValue
     private UUID ISBN;
+    @OneToMany(mappedBy = "loanedItem")
+    private List<Borrow> borrows;
     private String title;
     private LocalDate yearPublication;
     private int numberPage;
