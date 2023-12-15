@@ -5,7 +5,7 @@ import java.time.LocalDate;
 
 @Entity
 @Table(name = "borrows")
-@NamedQuery(name = "findBorrowUser", query = "SELECT bor FROM Borrow bor WHERE bor.user.cardNumber = :cardNumber")
+@NamedQuery(name = "findBorrowUser", query = "SELECT bor FROM Borrow bor WHERE bor.user.cardNumber = :cardNumber AND bor.effectiveReturnDate IS NULL")
 public class Borrow {
 
     @Id
