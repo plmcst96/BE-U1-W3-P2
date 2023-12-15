@@ -12,7 +12,7 @@ public abstract class LibraryItem {
     @Id
     @GeneratedValue
     private UUID ISBN;
-    @OneToMany(mappedBy = "loanedItem")
+   // @OneToMany(mappedBy = "loanedItem")
     private List<Borrow> borrows;
     private String title;
     private LocalDate yearPublication;

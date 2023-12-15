@@ -6,10 +6,6 @@ import java.time.LocalDate;
 @Entity
 @Table(name = "magazines")
 public class Magazine extends LibraryItem{
-
-    @Id
-    @GeneratedValue
-    private long id;
     @Enumerated(EnumType.STRING)
     private Periodicity periodicity;
 
@@ -20,9 +16,6 @@ public class Magazine extends LibraryItem{
 
     public Magazine(){}
 
-    public long getId() {
-        return id;
-    }
 
     public Periodicity getPeriodicity() {
         return periodicity;

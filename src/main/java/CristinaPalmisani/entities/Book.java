@@ -9,9 +9,6 @@ import java.time.LocalDate;
 @Entity
 @Table(name = "books")
 public class Book extends LibraryItem {
-    @Id
-    @GeneratedValue
-    private long id;
     private  String author;
     private String genre;
 
@@ -23,10 +20,6 @@ public class Book extends LibraryItem {
 
     public Book(){
         super();
-    }
-
-    public long getId() {
-        return id;
     }
 
     public String getAuthor() {
