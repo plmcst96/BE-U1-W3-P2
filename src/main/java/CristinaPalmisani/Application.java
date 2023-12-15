@@ -99,11 +99,14 @@ public class Application {
                     System.out.println("Insert ISBN");
                     id = UUID.fromString(input.nextLine());
                     System.out.println("Insert date to start borrow");
-                    start = LocalDate.parse(input.nextLine());
+                    String startstr = input.nextLine();
+                    start = LocalDate.parse(startstr, DateTimeFormatter.ofPattern("dd/MM/yyyy"));
                     System.out.println("Insert date to end borrow");
-                    end = LocalDate.parse(input.nextLine());
+                    String endstr = input.nextLine();
+                    end = LocalDate.parse(endstr, DateTimeFormatter.ofPattern("dd/MM/yyyy"));
                     System.out.println("Insert returned date to end borrow or null");
-                    returnd = LocalDate.parse(input.nextLine());
+                    String retstr = input.nextLine();
+                    returnd =LocalDate.parse(retstr, DateTimeFormatter.ofPattern("dd/MM/yyyy"));
                     Borrow borrow = new Borrow(user, libraryDao.getById(id), start, returnd, end );
                     borrowDao.save(borrow);
                     System.out.println("Press enter to continue");

@@ -8,7 +8,7 @@ import java.util.UUID;
 @Entity
 @Table(name = "catalogue")
 @Inheritance(strategy = InheritanceType.JOINED)
-@NamedQuery(name = "findByYear", query = "SELECT i FROM LibraryItem i WHERE i.yearPublication LIKE CONCAT('%',:yearPublication,'%')")
+@NamedQuery(name = "findByYear", query = "SELECT p FROM Publication p WHERE EXTRACT(YEAR FROM p.publicationDate) = :year")
 public abstract class LibraryItem {
     @Id
     @GeneratedValue
