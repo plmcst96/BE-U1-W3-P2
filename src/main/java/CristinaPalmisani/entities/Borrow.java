@@ -1,9 +1,6 @@
 package CristinaPalmisani.entities;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.time.LocalDate;
 
 @Entity
@@ -13,7 +10,11 @@ public class Borrow {
     @Id
     @GeneratedValue
     private int id;
+    @ManyToOne
+    @JoinColumn(name = "user_id")
     private User user;
+    @ManyToOne
+    @JoinColumn(name = "item_id")
     private LibraryItem loanedItem;
     private LocalDate startDateBorrow;
     private LocalDate returnDate;
@@ -23,7 +24,7 @@ public class Borrow {
         this.user = user;
         this.loanedItem = loanedItem;
         this.startDateBorrow = startDateBorrow;
-        this.returnDate = returnDate;
+        this.returnDate = startDateBorrow.plusDays(30);
         this.effectiveReturnDate = effectiveReturnDate;
     }
 

@@ -2,6 +2,7 @@ package CristinaPalmisani.entities;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.List;
 
 @Entity
 @Table(name = "users")
@@ -10,6 +11,8 @@ public class User {
     @GeneratedValue
     @Column(name = "card_numbererdiagram")
     private int cardNumber;
+    @OneToMany(mappedBy = "user")
+    private List<Borrow> borrows;
     private String name;
     private String surname;
     private LocalDate birthday;

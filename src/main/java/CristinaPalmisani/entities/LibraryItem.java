@@ -8,11 +8,12 @@ import java.util.UUID;
 @Entity
 @Table(name = "catalogue")
 @Inheritance(strategy = InheritanceType.JOINED)
+@NamedQuery(name = "findByName", query = "SELECT li EXTRACT(YEAR FROM li.yearPublication) FROM LibraryItem li WHERE li.yearPublication = :yearPublication")
 public abstract class LibraryItem {
     @Id
     @GeneratedValue
     private UUID ISBN;
-   // @OneToMany(mappedBy = "loanedItem")
+    @OneToMany(mappedBy = "loanedItem")
     private List<Borrow> borrows;
     private String title;
     private LocalDate yearPublication;
