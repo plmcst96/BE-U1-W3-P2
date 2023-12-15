@@ -54,6 +54,11 @@ public class Application {
         LocalDate year;
         String author;
         String title;
+        LocalDate start;
+        LocalDate end;
+        LocalDate returnd;
+        int cardnum;
+        List<Borrow> borrowList;
 
         int choice = -1;
 
@@ -69,7 +74,7 @@ public class Application {
             System.out.println("6 - Search item by title");
             System.out.println("7 - Search borrowed item by card number user");
             System.out.println("8 - Search expired borrows");
-
+            System.out.println("0 - exit");
             try {
                 choice = Integer.parseInt(input.nextLine());
             } catch (NumberFormatException ex){
@@ -88,7 +93,16 @@ public class Application {
                     User user = new User(name, surname, birth);
                     userDAO.save(user);
                     System.out.println("Choose a book to borrow");
-
+                    System.out.println("Insert ISBN");
+                    id = UUID.fromString(input.nextLine());
+                    System.out.println("Insert date to start borrow");
+                    start = LocalDate.parse(input.nextLine());
+                    System.out.println("Insert date to end borrow");
+                    end = LocalDate.parse(input.nextLine());
+                    System.out.println("Insert returned date to end borrow or null");
+                    returnd = LocalDate.parse(input.nextLine());
+                    Borrow borrow = new Borrow(user, libraryDao.getById(id), start, returnd, end );
+                    borrowDao.save(borrow);
                     System.out.println("Press enter to continue");
                     input.nextLine();
                     break;
@@ -134,6 +148,23 @@ public class Application {
                     input.nextLine();
                     break;
                 case 7:
+                    System.out.println("Search borrowed item");
+                    System.out.println("Inser your card number");
+                    cardnum = Integer.parseInt(input.nextLine());
+                    borrowDao.findBorrowByCardNumUser(cardnum);
+                    System.out.println("Press enter to continue");
+                    input.nextLine();
+                    break;
+                case 8:
+                    borrowList = borrowDao.showUnreturnedItems();
+                    System.out.println(borrowList.size() + " items not returned\n");
+                    borrowList.forEach(System.out::println);
+                    System.out.println("press enter to continue");
+                    input.nextLine();
+                    break;
+                case 0:
+                    System.out.println("0");
+                    break;
 
             }
         }
