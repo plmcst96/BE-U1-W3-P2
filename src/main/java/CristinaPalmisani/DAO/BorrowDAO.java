@@ -52,4 +52,9 @@ public class BorrowDAO {
         query.setParameter("item", item);
         return query.getResultList().isEmpty();
     }
+
+    private List<Borrow> findAll() {
+        TypedQuery<Borrow> query = em.createQuery("SELECT b FROM Borrow b", Borrow.class);
+        return query.getResultList();
+    }
 }

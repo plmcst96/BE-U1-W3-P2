@@ -9,7 +9,7 @@ import java.util.List;
 public class User {
     @Id
     @GeneratedValue
-    @Column(name = "card_numbererdiagram")
+    @Column(name = "card_number")
     private int cardNumber;
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private List<Borrow> borrows;
