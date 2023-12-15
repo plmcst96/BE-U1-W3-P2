@@ -24,7 +24,6 @@ public class Application {
      static final EntityManager em = emf.createEntityManager();
     static Scanner input = new Scanner(System.in);
     public static void main(String[] args) {
-        EntityManager em = emf.createEntityManager();
         LibraryItemDAO listItem = new LibraryItemDAO(em);
         Faker faker = new Faker();
         Random rndm = new Random();
@@ -95,7 +94,6 @@ public class Application {
                     String birthString = input.nextLine();
                     birth = LocalDate.parse(birthString, DateTimeFormatter.ofPattern("dd/MM/yyyy"));
                     User user = new User(name, surname, birth);
-                    user.setCardNumber(1234);
                     userDAO.save(user);
                     System.out.println("Choose a book to borrow");
                     System.out.println("Insert ISBN");
@@ -114,7 +112,8 @@ public class Application {
                 case 2:
                     System.out.println("Remove item");
                     System.out.println("Insert code ISBN");
-                    id = UUID.fromString(input.nextLine());
+                    String isbnString = input.nextLine();
+                    id = UUID.fromString(isbnString);
                     libraryDao.findByIdAndDelete(id);
                     System.out.println("Press enter to continue");
                     input.nextLine();
@@ -130,7 +129,7 @@ public class Application {
                 case 4:
                     System.out.println("Search item by year");
                     System.out.println("Insert year of publication");
-                    year = LocalDate.ofEpochDay(input.nextInt());
+                    year = LocalDate.parse(input.nextLine());
                     libraryDao.findByYear(year);
                     System.out.println("Press enter to continue");
                     input.nextLine();
