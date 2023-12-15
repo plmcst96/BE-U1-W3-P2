@@ -9,7 +9,7 @@ import java.util.List;
 public class User {
     @Id
     @GeneratedValue
-    @Column(name = "card_number")
+    @Column(name = "card_number", nullable = false)
     private int cardNumber;
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private List<Borrow> borrows;
@@ -35,6 +35,10 @@ public class User {
 
     public int getCardNumber() {
         return cardNumber;
+    }
+
+    public void setCardNumber(int cardNumber) {
+        this.cardNumber = cardNumber;
     }
 
     public String getName() {

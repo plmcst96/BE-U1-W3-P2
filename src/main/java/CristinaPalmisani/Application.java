@@ -4,6 +4,8 @@ import CristinaPalmisani.DAO.BorrowDAO;
 import CristinaPalmisani.DAO.LibraryItemDAO;
 import CristinaPalmisani.DAO.UserDAO;
 import CristinaPalmisani.entities.*;
+
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import com.github.javafaker.Faker;
 
@@ -40,6 +42,7 @@ public class Application {
                     faker.number().numberBetween(1, 60), faker.options().option(Periodicity.class));
             //listItem.save(magazine);
         }
+        menu();
     }
 
     public static void menu(){
@@ -89,8 +92,10 @@ public class Application {
                     System.out.println("Insert surname: ");
                     surname = input.nextLine();
                     System.out.println("Insert birthday: ");
-                    birth = LocalDate.ofEpochDay(input.nextInt());
+                    String birthString = input.nextLine();
+                    birth = LocalDate.parse(birthString, DateTimeFormatter.ofPattern("dd/MM/yyyy"));
                     User user = new User(name, surname, birth);
+                    user.setCardNumber(1234);
                     userDAO.save(user);
                     System.out.println("Choose a book to borrow");
                     System.out.println("Insert ISBN");
