@@ -11,7 +11,7 @@ public class User {
     @GeneratedValue
     @Column(name = "card_numbererdiagram")
     private int cardNumber;
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private List<Borrow> borrows;
     private String name;
     private String surname;
@@ -59,5 +59,13 @@ public class User {
 
     public void setBirthday(LocalDate birthday) {
         this.birthday = birthday;
+    }
+
+    public List<Borrow> getBorrows() {
+        return borrows;
+    }
+
+    public void setBorrows(List<Borrow> borrows) {
+        this.borrows = borrows;
     }
 }

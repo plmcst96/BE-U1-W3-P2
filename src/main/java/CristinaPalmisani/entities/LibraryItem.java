@@ -8,12 +8,12 @@ import java.util.UUID;
 @Entity
 @Table(name = "catalogue")
 @Inheritance(strategy = InheritanceType.JOINED)
-@NamedQuery(name = "findByName", query = "SELECT li EXTRACT(YEAR FROM li.yearPublication) FROM LibraryItem li WHERE li.yearPublication = :yearPublication")
+@NamedQuery(name = "findByYear", query = "SELECT i FROM LibraryItem i WHERE i.yearPublication LIKE CONCAT('%',:yearPublication,'%')")
 public abstract class LibraryItem {
     @Id
     @GeneratedValue
     private UUID ISBN;
-    @OneToMany(mappedBy = "loanedItem")
+    @OneToMany(mappedBy = "loanedItem", cascade = CascadeType.REMOVE)
     private List<Borrow> borrows;
     private String title;
     private LocalDate yearPublication;
@@ -53,6 +53,14 @@ public abstract class LibraryItem {
 
     public void setNumberPage(int numberPage) {
         this.numberPage = numberPage;
+    }
+
+    public List<Borrow> getBorrows() {
+        return borrows;
+    }
+
+    public void setBorrows(List<Borrow> borrows) {
+        this.borrows = borrows;
     }
 
     @Override
